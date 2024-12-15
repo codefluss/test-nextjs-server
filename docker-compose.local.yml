@@ -1,10 +1,8 @@
 version: '3.8'
 
 services:
-  client:
-    image: ghcr.io/codefluss/test-nextjs-server
-    container_name: test-client
-    pull_policy: always
+  web:
+    build: .
     ports:
       - "80:3000"
     environment:
