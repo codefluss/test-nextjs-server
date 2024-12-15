@@ -1,5 +1,5 @@
-# Use the official Node.js image as the base image
-FROM node:18-alpine
+# Stage 1: Build the application
+FROM node:18-alpine AS builder
 
 # Set the working directory
 WORKDIR /app
@@ -16,8 +16,18 @@ COPY . .
 # Build the Next.js application
 RUN npm run build
 
+# Stage 2: Run the application
+FROM node:18-alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the built application from the builder stage
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
 # Expose the port the app runs on
 EXPOSE 3000
 
 # Start the Next.js application
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
