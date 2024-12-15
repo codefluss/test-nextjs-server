@@ -21,6 +21,8 @@ export default function ClientInfo() {
       .then(data => {
         setClientInfo({ currentDate, language, screenResolution, ipAddress: data.ip });
       });
+
+    console.log('Client Side Log:', currentDate, language, screenResolution);
   }, []);
 
   return (

@@ -5,13 +5,15 @@ export default function ServerInfo() {
   const currentDate = new Date().toLocaleString();
   const ipAddress = os.networkInterfaces()['eth0']?.[0]?.address || 'IP not available';
 
+  console.log('Server Side Log:', currentDate, ipAddress);
+
   return (
     <div>
         <h3 className="text-2xl font-bold">Info Server Side: </h3>
         <ul>
             <li>Current Date and Time: {currentDate}</li>
             <li>Running on: {isClientSide ? 'Client Side' : 'Server Side'}</li>
-            <li>Server IP Address: {ipAddress}</li>
+            {/* <li>Server IP Address: {ipAddress}</li> */}
         </ul>
     </div>
   );
